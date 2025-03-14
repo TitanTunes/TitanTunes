@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titan Tunes - Music Promotion Services</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+    <link rel="stylesheet" href="loading.css">
+
+    <style>
+        /* Inline critical loading styles */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #242038 0%, #725AC1 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        #lottie-loading-container {
+            width: 200px;
+            height: 200px;
+        }
+
+        .loading-text {
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 20px;
+            background: linear-gradient(90deg, #FFD700, #FF6B6B, #725AC1, #4ECDC4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 300% 100%;
+            animation: gradientMove 4s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Hide main content until loaded */
+        body.loading .main-content {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="loading">
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div id="lottie-loading-container"></div>
+        <div class="loading-text">Loading Titan Tunes...</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div id="lottie-background"></div>
+        <div class="gradient-bg"></div>
+
+        <nav class="navbar">
+            <div class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#about">About us</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contacts">Contacts</a>
+            </div>
+        </nav>
+
+        <main>
+            <section id="home" class="hero">
+                <div class="geometric-shapes"></div>
+                <img src="assets/Logo.png" alt="Titan Tunes" class="logo">
+                <div class="tagline">
+                    Welcome to Titantunes Team!
+                    <p>Passionate music promoters helping artists grow with tailored strategies in promotion, marketing, and audience engagement.</p>
+                </div>
+                <div class="cta-buttons">
+                    <button class="btn contact-btn">Contact Us</button>
+                    <button class="btn details-btn">More Details</button>
+                </div>
+            </section>
+
+            <section id="about" class="about">
+                <h2>About US</h2>
+                <div class="about-content">
+                    <p>With years of combined experience in music promotion, digital marketing, and audience engagement, we craft tailored strategies that resonate with your unique sound and vision.</p>
+                </div>
+
+                <div class="strategies">
+                    <h3>Our Promotion Strategies</h3>
+                    <div class="strategy-container">
+                        <div class="strategy-intro">
+                            We offer a wide range of services designed to amplify your music career
+                        </div>
+                        <div class="strategy-grid">
+                            <div class="strategy-card">Social Media Marketing</div>
+                            <div class="strategy-card">Playlist Promotion</div>
+                            <div class="strategy-card">Public Relations</div>
+                            <div class="strategy-card">Event Promotion</div>
+                            <div class="strategy-card">Brand Development</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="why-choose-us">
+                    <h3>Why Choose Us?</h3>
+                    <div class="why-us-container">
+                        <div class="why-us-intro">
+                            Partnering with Titantunes Team means working with a team genuinely invested in your success.
+                        </div>
+                        <div class="why-us-grid">
+                            <div class="why-us-card">Industry Expertise</div>
+                            <div class="why-us-card">Personalized Approach</div>
+                            <div class="why-us-card">Public Relations</div>
+                            <div class="why-us-card">Proven Track Record</div>
+                            <div class="why-us-card">Passion for Music</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <h3>What Our Artists Say?</h3>
+                    <div class="testimonial-card">
+                        <p>"Working with Titantunes Team was a game-changer for my career. Their expertise and dedication helped me reach a much larger audience than I ever thought possible. They not only promoted my music effectively but also helped me connect with my fans on a deeper level. I couldn't be happier with the results!"</p>
+                        <span class="author">— DJ Karaba</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="partner" class="partner">
+                <h2>Partner with Us!</h2>
+                <div class="partner-content">
+                    <p>Are you ready to take your music career to the next level? At Titantunes Team, we are here to support you every step of the way. Let us be your partner in navigating the music landscape, unlocking opportunities, and achieving your dreams.</p>
+                </div>
+
+                <div class="elevate">
+                    <h3>Ready to Elevate Your Music Career?</h3>
+                    <div class="elevate-content">
+                        <p>If you're looking for a passionate and experienced team to promote your music, look no further! Contact us today to discuss how we can help you shine in the music industry. Together, we can create a powerful impact and elevate your career to new heights!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="before-after" class="before-after">
+                <h2>Before & After Our Promotion</h2>
+                <div class="comparison-container">
+                    <div class="comparison-item">
+                        <div class="before-card">
+                            <h3>Before Titan Tunes</h3>
+                            <ul>
+                                <li>Limited audience reach</li>
+                                <li>Low streaming numbers</li>
+                                <li>Minimal social media engagement</li>
+                                <li>Difficulty getting playlist placements</li>
+                                <li>Inconsistent brand messaging</li>
+                            </ul>
+                            <div class="stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">150</span>
+                                    <span class="stat-label">Monthly Listeners</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">240</span>
+                                    <span class="stat-label">Social Followers</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="after-card">
+                            <h3>After Titan Tunes</h3>
+                            <ul>
+                                <li>Exponential audience growth</li>
+                                <li>Significant increase in streams</li> 
+                                <li>Active and engaged social community</li>
+                                <li>Multiple playlist placements</li>
+                                <li>Cohesive artist branding</li>
+                            </ul>
+                            <div class="stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">15,000+</span>
+                                    <span class="stat-label">Monthly Listeners</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">8,500+</span>
+                                    <span class="stat-label">Social Followers</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reviews" class="reviews">
+                <h2>Reviews</h2>
+                <div class="review-grid">
+                    <div class="review-card mint">
+                        <div class="stars">★★★★★</div>
+                        <div class="duration">4 DAYS DURATION</div>
+                        <p>Amazing! From the very much you're services helped me get my music there and I've managed to gain loads more followers and listens :)</p>
+                    </div>
+                    <div class="review-card pink">
+                        <div class="stars">★★★★★</div>
+                        <div class="duration">6 DAYS DURATION</div>
+                        <p>Have been struggling to find good soundcloud promotion for over a year and then it came across these. So glad I went with what the reviews said, it was 100% legit!</p>
+                    </div>
+                    <div class="review-card blue">
+                        <div class="stars">★★★★★</div>
+                        <div class="duration">4 DAYS DURATION</div>
+                        <p>Great service!</p>
+                    </div>
+                    <div class="review-card gold">
+                        <div class="stars">★★★★★</div>
+                        <div class="duration">5 DAYS DURATION</div>
+                        <p>Great work, they seem like legit people and not bots. It's nice to have a service where they are real fans. Will be working with him again!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contacts" class="contacts"> 
+                <h2>Contact us!</h2>
+                <div class="socials">
+                    <h3>Socials</h3>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/titantunes001?igsh=bG5sOXJjdnoxenh3" class="social-icon">
+                            <img src="assets/Instaicon.png" alt="Instagram">
+                            <span>INSTAGRAM</span>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61567190360625" class="social-icon">
+                            <img src="assets/Facebookicon.png" alt="Facebook">
+                            <span>FACEBOOK</span>
+                        </a>
+                        <a href="https://x.com/Titantunes001?t=j703JTatfe7uyAhWCpN7HA&s=09" class="social-icon">
+                            <img src="assets/X icon.png" alt="Twitter">
+                            <span>TWITTER</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="message">
+                    <h3>Send here a message!</h3>
+                    <div class="message-icons">
+                        <a href="mailto:titantunes2307@gmail.com" class="message-icon">
+                            <img src="assets/mail icon.png" alt="Mail">
+                            <span>MAIL</span>
+                        </a>
+                        <a href="https://wa.me/13377487078" class="message-icon">
+                            <img src="assets/whatsapp icon.png" alt="WhatsApp">
+                            <span>WHATSAPP</span>
+                        </a>
+                        <a href="https://t.me/Titantunes2307" class="message-icon">
+                            <img src="assets/telegram icon.png" alt="Telegram">
+                            <span>TELEGRAM</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Initialize Lottie loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create Lottie animation for loading screen
+            const loadingAnimation = lottie.loadAnimation({
+                container: document.getElementById('lottie-loading-container'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'logoanimation.json' // Path to your Lottie JSON file
+            });
+
+            // Simulate loading time (replace with actual asset loading logic)
+            function simulateLoading() {
+                return new Promise((resolve) => {
+                    // Simulate resources loading
+                    setTimeout(() => {
+                        resolve();
+                    }, 2500);
+                });
+            }
+
+            // Handle loading complete
+            simulateLoading().then(() => {
+                // Remove loading class from body
+                document.body.classList.remove('loading');
+                
+                // Fade out loading overlay
+                const loadingOverlay = document.getElementById('loading-overlay');
+                loadingOverlay.style.opacity = '0';
+                
+                // Remove loading overlay after transition
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                    
+                    // Initialize main page Lottie animation
+                }, 500);
+            });
+        });
+
+        // Main website JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize main site functionality after loading
+            const mainScript = document.createElement('script');
+            mainScript.src = 'main.js';
+            document.body.appendChild(mainScript);
+        });
+    </script>
+</body>
+</html>
