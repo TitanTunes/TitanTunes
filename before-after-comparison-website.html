@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Before & After Results</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+    <link rel="stylesheet" href="loading.css">
+    <style>
+        :root {
+            --gradient-bg: linear-gradient(135deg, #360e36 0%, #1e1133 50%, #1a2e36 100%);
+            --pink-color: #ff9bb3;
+            --purple-color: #9159c8;
+            --blue-color: #7e83eb;
+            --light-purple: #cea6ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        html, body {
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+        
+        body {
+            background: var(--gradient-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        
+        .container {
+            width: 80%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(10px, 2vh, 20px);
+            padding: clamp(5px, 1.5vw, 15px);
+            height: 100%;
+        }
+        
+        h1 {
+            color: var(--pink-color);
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            text-align: center;
+            animation: fadeInDown 1s ease-out;
+            margin-bottom: clamp(5px, 1vh, 10px);
+        }
+        
+        .comparison-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: clamp(5px, 1vw, 10px);
+            animation: fadeIn 1.2s ease-out;
+            flex: 1;
+            max-height: 60vh;
+        }
+        
+        .nav-arrow {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            color: var(--purple-color);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+            padding: 0 clamp(2px, 0.5vw, 5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        
+        .nav-arrow:hover {
+            transform: scale(1.2);
+            color: var(--light-purple);
+        }
+        
+        .comparison-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .comparison-pair {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: clamp(10px, 2vw, 20px);
+            width: 100%;
+            height: 100%;
+        }
+        
+        .image-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(5px, 1vh, 10px);
+            height: 100%;
+        }
+        
+        .label {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: bold;
+        }
+        
+        .before .label {
+            color: var(--purple-color);
+        }
+        
+        .after .label {
+            color: var(--blue-color);
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%; /* 1:1 Aspect ratio */
+            background-color: #e0e0e0;
+            border-radius: clamp(10px, 2vw, 20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            max-height: calc(100% - clamp(1.2rem, 3vw, 2rem) - clamp(5px, 1vh, 10px));
+        }
+        
+        .image-placeholder::after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        
+        .image-placeholder:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .back-button {
+            background-color: var(--light-purple);
+            color: #333;
+            font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+            font-weight: bold;
+            padding: clamp(6px, 1.5vw, 8px) clamp(20px, 4vw, 40px);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: pulseButton 2s infinite alternate;
+            margin-bottom: clamp(10px, 2vh, 20px);
+        }
+        
+        .back-button:hover {
+            transform: scale(1.1);
+            background-color: var(--purple-color);
+            color: white;
+            animation: none;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulseButton {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+        
+        /* Slider functionality */
+        .comparison-slider-wrapper {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .comparison-slider-wrapper.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                gap: 2vh;
+                justify-content: space-between;
+            }
+            
+            .comparison-pair {
+                flex-direction: column;
+                gap: 1.5vh;
+            }
+            
+            .image-container {
+                height: auto;
+            }
+            
+            .image-placeholder {
+                padding-bottom: 70%; /* Reduced aspect ratio on mobile */
+                max-height: none;
+            }
+        }
+        
+        @media (orientation: landscape) and (max-height: 450px) {
+            .container {
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: space-between;
+                gap: 10px;
+            }
+            
+            h1 {
+                width: 100%;
+                margin-bottom: 0;
+                font-size: clamp(1.5rem, 4vw, 2.5rem);
+            }
+            
+            .comparison-container {
+                max-height: none;
+                height: 70%;
+            }
+            
+            .comparison-pair {
+                flex-direction: row;
+                gap: 10px;
+            }
+            
+            .label {
+                font-size: clamp(1rem, 2.5vw, 1.5rem);
+            }
+            
+            .back-button {
+                margin: 0;
+                font-size: clamp(0.7rem, 2vw, 1rem);
+                padding: 5px 20px;
+            }
+            
+            .image-placeholder {
+                padding-bottom: 60%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OUR RESULTS</h1>
+        
+        <div class="comparison-container">
+            <button class="nav-arrow prev-arrow">&#10094;</button>
+            
+            <div class="comparison-slider">
+                <!-- First Comparison Set -->
+                <div class="comparison-slider-wrapper active" data-index="0">
+                    <div class="comparison-pair">
+                        <div class="image-container before">
+                            <div class="label">Before</div>
+                            <div class="image-placeholder" style="background-image: url('Assets/before1.jpg'); background-size: cover; background-position: center;"></div>
+                        </div>
+                        
+                        <div class="image-container after">
+                            <div class="label">After</div>
+                            <div class="image-placeholder" style="background-image: url('Assets/after1.jpg'); background-size: cover; background-position: center;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Second Comparison Set -->
+                <div class="comparison-slider-wrapper" data-index="1">
+                    <div class="comparison-pair">
+                        <div class="image-container before">
+                            <div class="label">Before</div>
+                            <div class="image-placeholder" style="background-image: url('Assets/before2.jpg'); background-size: cover; background-position: center;"></div>
+                        </div>
+                        
+                        <div class="image-container after">
+                            <div class="label">After</div>
+                            <div class="image-placeholder" style="background-image: url('Assets/after2.jpg'); background-size: cover; background-position: center;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Third Comparison Set -->
+                <div class="comparison-slider-wrapper" data-index="2">
+                    <div class="comparison-pair">
+                        <div class="image-container before">
+                            <div class="label">Before</div>
+                            <div class="image-placeholder" style="background-image: url('Assets/before3.jpg'); background-size: cover; background-position: center;"></div>
+                        </div>
+                        
+                        <div class="image-container after">
+                            <div class="label">After</div>
+                            <div class="image-placeholder" style="background-image: url('Assets/after3.jpg'); background-size: cover; background-position: center;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="nav-arrow next-arrow">&#10095;</button>
+        </div>
+        
+        <button class="back-button">BACK</button>
+    </div>
+    <script>
+        // Initialize Lottie loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create Lottie animation for loading screen
+            const loadingAnimation = lottie.loadAnimation({
+                container: document.getElementById('lottie-loading-container'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'logoanimation.json' // Path to your Lottie JSON file
+            });
+
+            // Simulate loading time (replace with actual asset loading logic)
+            function simulateLoading() {
+                return new Promise((resolve) => {
+                    // Simulate resources loading
+                    setTimeout(() => {
+                        resolve();
+                    }, 2500);
+                });
+            }
+
+            // Handle loading complete
+            simulateLoading().then(() => {
+                // Remove loading class from body
+                document.body.classList.remove('loading');
+                
+                // Fade out loading overlay
+                const loadingOverlay = document.getElementById('loading-overlay');
+                loadingOverlay.style.opacity = '0';
+                
+                // Remove loading overlay after transition
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                    
+                    // Initialize main page Lottie animation
+                }, 500);
+            });
+        });
+
+        // Main website JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize main site functionality after loading
+            const mainScript = document.createElement('script');
+            mainScript.src = 'main.js';
+            document.body.appendChild(mainScript);
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Slider functionality
+            const prevArrow = document.querySelector('.prev-arrow');
+            const nextArrow = document.querySelector('.next-arrow');
+            const sliders = document.querySelectorAll('.comparison-slider-wrapper');
+            const backButton = document.querySelector('.back-button');
+            let currentIndex = 0;
+            
+            // Update visible slider
+            function updateSlider() {
+                sliders.forEach((slider, index) => {
+                    if (index === currentIndex) {
+                        slider.classList.add('active');
+                    } else {
+                        slider.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Previous slide
+            prevArrow.addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + sliders.length) % sliders.length;
+                updateSlider();
+                
+                // Add animation effect
+                document.querySelector('.comparison-container').style.animation = 'none';
+                setTimeout(() => {
+                    document.querySelector('.comparison-container').style.animation = 'fadeIn 0.5s ease-out';
+                }, 10);
+            });
+            
+            // Next slide
+            nextArrow.addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % sliders.length;
+                updateSlider();
+                
+                // Add animation effect
+                document.querySelector('.comparison-container').style.animation = 'none';
+                setTimeout(() => {
+                    document.querySelector('.comparison-container').style.animation = 'fadeIn 0.5s ease-out';
+                }, 10);
+            });
+            
+            // Touch swipe functionality
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            document.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+            
+            function handleSwipe() {
+                const threshold = 30; // Reduced threshold for more sensitive swipe
+                if (touchEndX < touchStartX - threshold) {
+                    // Swipe left - next slide
+                    nextArrow.click();
+                } else if (touchEndX > touchStartX + threshold) {
+                    // Swipe right - previous slide
+                    prevArrow.click();
+                }
+            }
+            
+            // Back button functionality
+            backButton.addEventListener('click', function() {
+                // Redirect to another page - replace with actual URL
+                window.location.href = 'index.html';
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    prevArrow.click();
+                } else if (e.key === 'ArrowRight') {
+                    nextArrow.click();
+                } else if (e.key === 'Escape') {
+                    backButton.click();
+                }
+            });
+            
+            // Resize handling for optimal layout
+            window.addEventListener('resize', optimizeLayout);
+            optimizeLayout();
+            
+            function optimizeLayout() {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+                
+                // Adjust container width based on aspect ratio
+                const aspectRatio = window.innerWidth / window.innerHeight;
+                const container = document.querySelector('.container');
+                
+                if (aspectRatio < 0.7) {
+                    // Very narrow screens
+                    container.style.width = '95%';
+                } else if (aspectRatio > 1.5) {
+                    // Very wide screens
+                    container.style.width = '70%';
+                } else {
+                    // Standard screens
+                    container.style.width = '80%';
+                }
+            }
+        });
+    </script>
+ 
+</body>
+</html>
